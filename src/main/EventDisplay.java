@@ -37,6 +37,10 @@ public class EventDisplay extends JPanel
 		JButton addButton = new JButton( "Add" );
 		closeButton.addActionListener( new AddListener( this.date ) );
 		this.add( addButton );
+		
+		JButton deleteButton = new JButton( "Delete" );
+		closeButton.addActionListener( new DeleteListener( events  ) );
+		this.add( deleteButton );
 	}
 	
 	public void paintComponent( Graphics g )

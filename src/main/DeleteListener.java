@@ -19,7 +19,7 @@ public class DeleteListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		JDialog deleteDisplay = new DeleteDisplay( events );
+		JDialog deleteDisplay = new DeleteDisplay( eventList );
 
 	}
 

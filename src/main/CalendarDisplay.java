@@ -28,7 +28,7 @@ public class CalendarDisplay extends JPanel implements MouseListener
 		g.setFont(serifFont);
 		FontMetrics metrics = g.getFontMetrics();
 
-		// paint cards on board
+		// paint days on board
 		int dx;
 		int dy;
 

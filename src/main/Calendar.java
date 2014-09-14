@@ -12,7 +12,7 @@ public class Calendar
 	
 	
 	/**
-	 * Default constructor, sets month and year to 0, yy
+	 * Default constructor, sets month and year to 0,
 	 */
 	public Calendar()
 	{

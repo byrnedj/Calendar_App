@@ -17,7 +17,7 @@ public class CalendarApp extends JFrame
 	public CalendarApp()
 	{	
 
-		//TODO Set to current date
+		//TODO Set to current date..
 		calendar = new Calendar();
 		month = calendar.getMonth();
 		

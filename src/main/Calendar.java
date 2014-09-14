@@ -8,7 +8,7 @@ public class Calendar
 	private ArrayList<Day> days;
 	private int month;
 	private int year;
-	
+	private Day[][] daysInMonth;
 	
 	
 	/**
@@ -19,6 +19,7 @@ public class Calendar
 		days = new ArrayList<Day>();
 		month = 0;
 		year = 0;
+		daysInMonth = new Day[7][5];
 	}
 	
 	/**
@@ -32,6 +33,7 @@ public class Calendar
 		days = aDays;
 		month = aMonth;
 		year = aYear;
+		daysInMonth = new Day[7][5];
 	}
 	
 	/**

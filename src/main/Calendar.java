@@ -9,8 +9,10 @@ public class Calendar
 	private int month;
 	private int year;
 	
+	
+	
 	/**
-	 * Default constructor, sets month and year to 0
+	 * Default constructor, sets month and year to 0, yy
 	 */
 	public Calendar()
 	{

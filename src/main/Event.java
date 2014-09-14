@@ -42,6 +42,15 @@ public class Event
 	}
 	
 	/**
+	 * Returns the date of the event
+	 * @return Date representation of the date
+	 */
+	public Date getDate()
+	{
+		return time;
+	}
+	
+	/**
 	 * Sets the time of the event
 	 * @param aTime
 	 */

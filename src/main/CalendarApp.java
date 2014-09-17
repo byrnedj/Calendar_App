@@ -14,26 +14,20 @@ public class CalendarApp extends JFrame
 	private int dayOrder;
 	private int month;
 	private int days;
+	
 	public CalendarApp()
 	{	
 
 		//TODO Set to current date..
-		calendar = new Calendar();
-		month = calendar.getMonth();
-		
-		if(month == 0){
-			dayStart = 31;
-			dayOrder = 0;
-			days = 30;
-		}
+		calendar = new Calendar( 0 );
 		
 		Container pane = getContentPane();
 		pane.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		this.setTitle("Calendar");
 
-		// Create display for drawing game state
-		display = new CalendarDisplay(calendar,dayStart,dayOrder,days);
+		// Create display for drawing
+		display = new CalendarDisplay(calendar, calendar.getMonth() );
 		display.addMouseListener(display);
 		display.setBackground(Color.black);
 		// make the window a specific size
@@ -44,7 +38,7 @@ public class CalendarApp extends JFrame
 	
 	public void init()
 	{
-		display = new CalendarDisplay( calendar,dayStart,dayOrder,days );
+		display = new CalendarDisplay( calendar, calendar.getMonth() );
 	}
 	
 	public static void main(String[] args) 

@@ -2,12 +2,14 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class Day 
 {
 	private ArrayList<Event> events;
-	private Date date;
+	private int date;
+	private int month;
 	
 	/**
 	 * Default constructor, creates blank day
@@ -15,7 +17,7 @@ public class Day
 	public Day()
 	{
 		events = new ArrayList<Event>();
-		date = new Date();
+		date = 0;
 	}
 	
 	/**
@@ -23,10 +25,11 @@ public class Day
 	 * @param aEvents list of events
 	 * @param aDate the date
 	 */
-	public Day( ArrayList<Event> aEvents, Date aDate )
+	public Day( int aDate, int aMonth )
 	{
-		events = aEvents;
+		events = new ArrayList<Event>();
 		date = aDate;
+		month = aMonth;
 	}
 	
 	/**
@@ -44,7 +47,9 @@ public class Day
 	 */
 	public Date getDate()
 	{
-		return date;
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.set( 2014 , month+8, date );
+		return cal.getTime();
 	}
 	
 	/**
@@ -76,13 +81,6 @@ public class Day
 		events.add( aNewEvent );
 	}
 	
-	/**
-	 * Sets a new date for the day
-	 * @param aDate 
-	 */
-	public void setDate( Date aDate )
-	{
-		date = aDate;
-	}
+
 	
 }

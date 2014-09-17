@@ -1,50 +1,41 @@
 package main;
 
-import java.sql.Date;
 import java.util.ArrayList;
+
 
 public class Calendar 
 {
-	private ArrayList<Day> days;
 	private int month;
 	private int year;
-	private Day[][] daysInMonth;
+	private ArrayList<Day> days;
 	
 	
 	/**
 	 * Default constructor, sets month and year to 0,
 	 */
-	public Calendar()
+	public Calendar( int aMonth )
 	{
-		days = new ArrayList<Day>();
-		month = 0;
-		year = 0;
-		daysInMonth = new Day[7][5];
-	}
-	
-	/**
-	 * Constructor taking parameters 
-	 * @param aMonth, as an integer
-	 * @param aYear, as an integer
-	 * @param aDays, as a list of days in the month
-	 */
-	public Calendar( int aMonth, int aYear, ArrayList<Day> aDays)
-	{
-		days = aDays;
 		month = aMonth;
-		year = aYear;
-		daysInMonth = new Day[7][5];
+		days = new ArrayList<Day>();
+		//offset is defined as the number of days of the previous month in the calendar
+		int offset = 0;
+		int numdays = 0;
+		if ( month == 0 )
+		{
+			offset = 1;
+			numdays = 30;
+		}
+		for ( int i = 0; i < offset; i++)
+		{
+			//Dummy days
+			days.add( new Day() );
+		}
+		for ( int i = offset; i <= numdays+offset; i++ )
+		{
+			days.add( new Day( i, month ) );
+		}
 	}
-	
-	/**
-	 * Gets the list of days on the calendar
-	 * @return ArrayList of days
-	 */
-	public ArrayList<Day> getDays()
-	{
-		return days;
-	}
-	
+		
 	public int getMonth()
 	{
 		return month;
@@ -65,8 +56,9 @@ public class Calendar
 		year = aYear;
 	}
 	
-	public void setDays( ArrayList<Day> aDays )
+	public Day getDay( int aDate )
 	{
-		days = aDays;
+		return days.get( aDate ); 
 	}
+	
 }

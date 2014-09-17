@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.text.DateFormat;
@@ -12,8 +13,9 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-public class EventDisplay extends JPanel
+public class EventDisplay extends JTextArea
 {
 	private static final long serialVersionUID = -3924738998808587098L;
 	private ArrayList<Event> events;
@@ -26,23 +28,36 @@ public class EventDisplay extends JPanel
 	{
 		events = aEvents;
 		this.setPreferredSize(new Dimension(100, 100));
+		if ( events.isEmpty() )
+		{
+			this.setText("Nothing for today!");
+		}
+		else
+		{
+			this.setText( events.toString() );
+		}
 	}
 
-	public void paintComponent( Graphics g )
+	/*public void paintComponent( Graphics g )
 	{
+		super.paintComponent(g);
+		Font serifFont = new Font("Serif", Font.PLAIN, 18);
+		g.setFont(serifFont);
+		g.setColor( Color.BLACK );
 		paintEvents( g );
 
 	}
 
-	/**
+	 *//**
 	 * Paint the events on the screen
 	 * @param g
-	 */
+	 *//*
 	public void paintEvents( Graphics g )
 	{
 		int x = 0;
 		int y = 0;
 		SimpleDateFormat formater = new SimpleDateFormat();
+
 		if ( events.isEmpty() )
 		{
 			g.drawString( "No events", x, y);
@@ -53,7 +68,7 @@ public class EventDisplay extends JPanel
 
 			for ( Event e : events )
 			{
-				g.setColor( Color.BLACK );
+
 				g.drawString( e.getName(), x, y);
 				g.drawString( e.getDescription(), x, y+1 );
 				String time = formater.format( e.getTime() );
@@ -63,6 +78,6 @@ public class EventDisplay extends JPanel
 
 			}
 		}
-	}
+	}*/
 
 }

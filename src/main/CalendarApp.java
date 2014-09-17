@@ -25,6 +25,7 @@ public class CalendarApp extends JFrame
 		pane.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		this.setTitle("Calendar");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);   
 
 		// Create display for drawing
 		display = new CalendarDisplay(calendar, calendar.getMonth() );

@@ -26,7 +26,8 @@ public class CalendarDisplay extends JPanel implements MouseListener
 			dayOrder = 0;
 			days = 30;
 		}
-
+		
+		
 
 
 

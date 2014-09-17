@@ -16,18 +16,39 @@ public class CalendarDisplay extends JPanel implements MouseListener
 	private int dayStart;
 	private int dayOrder;
 	private int days;
+	private String monthName;
 
 	public CalendarDisplay( Calendar aCalendar, int month ) 
 	{
 		calendar = aCalendar;
+
 		if( month == 0)
 		{
 			dayStart = 31;
 			dayOrder = 0;
 			days = 30;
+			monthName = "September";
 		}
 		
-		
+		else if(month == 1){
+			dayStart = 28;
+			dayOrder = 2;
+			days = 31;
+			monthName = "October";
+			}
+			else if(month == 2){
+			dayStart = 26;
+			dayOrder = 5;
+			days = 30;
+			monthName = "November";
+			}
+			else {
+			dayStart = 30;
+			dayOrder = 0;
+			days = 31;
+			monthName = "December";
+			}
+
 
 
 
@@ -38,6 +59,9 @@ public class CalendarDisplay extends JPanel implements MouseListener
 		super.paintComponent(g);
 		Font serifFont = new Font("Serif", Font.PLAIN, 18);
 		g.setFont(serifFont);
+		
+		g.setColor(Color.white); //Line 62
+		g.drawString(monthName, 280, 35);
 
 		// paint days on board..
 		int dx;
@@ -54,7 +78,7 @@ public class CalendarDisplay extends JPanel implements MouseListener
 			{
 				dx = (90 * j) + (10 * j);
 
-				paintDays( g, 25+dx, 35+dy, dayNumber );
+				paintDays( g, 25+dx, 60+dy, dayNumber );
 
 				if( dayOrder > 0 )
 				{
@@ -118,7 +142,7 @@ public class CalendarDisplay extends JPanel implements MouseListener
 
 		// Find y pos
 		while (theY > yMin && index < 7) {
-			yMin = 35 + (10 * index) + (60 * index);
+			yMin = 60 + (10 * index) + (60 * index);
 			yMax = yMin + 60;
 
 			if (theY < yMax && theY > yMin) {

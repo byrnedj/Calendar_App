@@ -2,17 +2,21 @@ package main;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CalendarApp extends JFrame 
 {
 
 	private static final long serialVersionUID = 6436208308121028463L;
-	private Calendar calendar;
-	private ArrayList<Calendar> calendars;
+	private CalendarData calendarData;
+	private ArrayList<CalendarData> calendarDatas;
 	private ArrayList<CalendarDisplay> calendarDisplays;
 	private CalendarDisplay display;
 	private int dayStart;
@@ -20,66 +24,121 @@ public class CalendarApp extends JFrame
 	private int month;
 	private int days;
 	
+	private JLabel monthName;
+	private JButton prevMonth;
+	private JButton nextMonth;
+	
 	public CalendarApp()
 	{	
-
-		//TODO Set to current date..
-		calendar = new Calendar( 0 );
 		
-		for (int i = 0; i < 3; i++ )
+		Calendar cal = Calendar.getInstance();
+		month = cal.get(Calendar.MONTH )-8 ;
+		calendarDisplays = new ArrayList<CalendarDisplay>();
+		for (int i = 0; i < 4; i++ )
 		{
-			calendars.add( new Calendar( i ) );
-			calendarDisplays.add( new CalendarDisplay( calendars.get( i )  , calendars.get(i ).getMonth() ) );
+			calendarDisplays.add( new CalendarDisplay( i ) );
 		}
 		
 		Container pane = getContentPane();
-		pane.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		GroupLayout gl = new GroupLayout(pane);
+		pane.setLayout( gl );
+		gl.setAutoCreateContainerGaps(true);
+		
 		this.setTitle("Calendar");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);   
 
 		// Create display for drawing
-		display = new CalendarDisplay(calendar, calendar.getMonth() );
-		display.addMouseListener(display);
+		display = calendarDisplays.get( cal.get(Calendar.MONTH )-8 );
 		display.setBackground(Color.black);
 		// make the window a specific size
 		display.setPreferredSize(new Dimension(740, 480));
-		c.gridy = 1;
+
 		
-		JPanel buttonPanel = new JPanel(); // Line 37
-		buttonPanel.setLayout(new FlowLayout());
-		buttonPanel.setBackground(Color.black);
-		buttonPanel.setPreferredSize(new Dimension(740,50));
-		c.gridy = 2;
-		pane.add(buttonPanel, c);
+		prevMonth = new JButton("<< Previous Month");
+		prevMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, false, month ) );
 		
 		
-		JPanel monthTraverse = new JPanel();
-		monthTraverse.setBackground(Color.black);
-		monthTraverse.setPreferredSize(new Dimension(740,50));
-		c.gridy = 0;
-		pane.add(monthTraverse, c);
+		nextMonth = new JButton("Next Month >>");
+		nextMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, true, month ) );
 		
-		JButton prevMonth = new JButton("<< Previous Month");
-		prevMonth.addActionListener( new MonthCycle( calendar, display, pane, c, false));
-		monthTraverse.add(prevMonth);
+		monthName = new JLabel();
+		monthName.setText( display.getMonth() );
 		
-		JButton nextMonth = new JButton("Next Month >>");
-		nextMonth.addActionListener( new MonthCycle( calendar, display, pane, c, true ) );
-		monthTraverse.add(nextMonth);
-		
-		pane.add(display, c);
+		gl.setHorizontalGroup( gl.createParallelGroup()
+				.addComponent( monthName )
+				.addComponent( nextMonth )
+				.addComponent( prevMonth )
+				.addComponent( display )
+				
+				);
+
+		gl.setVerticalGroup( gl.createSequentialGroup()
+				.addComponent( monthName )
+				.addComponent( nextMonth )
+				.addComponent( prevMonth )
+				.addComponent( display )
+				);
+
+		pack();
 	}
 	
-	public void init()
+	public void setDisplay( CalendarDisplay aDisplay )
 	{
-		display = new CalendarDisplay( calendar, calendar.getMonth() );
+		Container pane = getContentPane();
+		GroupLayout gl = new GroupLayout(pane);
+		pane.setLayout( gl );
+		gl.setAutoCreateContainerGaps(true);
+		
+		remove(display);
+		remove(monthName);
+		remove(nextMonth);
+		remove(prevMonth);
+		
+		for (int i = 0; i < calendarDisplays.size(); i++ )
+		{
+			if ( aDisplay.equals( calendarDisplays.get( i )))
+			{
+				month = i;
+				break;
+			}
+		}
+		// Create display for drawing
+		display = aDisplay;
+		display.setBackground(Color.black);
+		// make the window a specific size
+		display.setPreferredSize(new Dimension(740, 480));
+
+		
+		prevMonth = new JButton("<< Previous Month");
+		prevMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, false, month ) );
+		
+		
+		nextMonth = new JButton("Next Month >>");
+		nextMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, true, month ) );
+		
+		monthName = new JLabel();
+		monthName.setText( display.getMonth() );
+		
+		gl.setHorizontalGroup( gl.createParallelGroup()
+				.addComponent( monthName )
+				.addComponent( nextMonth )
+				.addComponent( prevMonth )
+				.addComponent( display )
+				
+				);
+
+		gl.setVerticalGroup( gl.createSequentialGroup()
+				.addComponent( monthName )
+				.addComponent( nextMonth )
+				.addComponent( prevMonth )
+				.addComponent( display )
+				);
+
+		pack();
 	}
-	
 	public static void main(String[] args) 
 	{
 		CalendarApp app = new CalendarApp();
-		app.init();
 		app.pack();
 		app.setVisible(true);
 		

@@ -1,65 +1,93 @@
 package main;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CalendarDisplay extends JPanel implements MouseListener
+import java.util.Calendar;
+/**
+ * @author daniel
+ *
+ */
+public class CalendarDisplay extends JPanel
 {
 	private static final long serialVersionUID = 992234023809153475L;
+	private int month;
+	
 
-	//Reference to the underlying calendar controller
-	private Calendar calendar;
-
-	private int dayStart;
-	private int dayOrder;
-	private int days;
-	private String monthName;
-
-	public CalendarDisplay( Calendar aCalendar, int month ) 
+	public CalendarDisplay( int month ) 
 	{
-		calendar = aCalendar;
+		this.month = month;
+		
+		GridLayout gl = new GridLayout( 0,7 );
+		this.setLayout( gl );
+		
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.set( 2014 , month+8, 1 );
 
-		if( month == 0)
+		int offset = cal.get( Calendar.DAY_OF_WEEK ) -1;
+		
+		cal.set( 2014 , month+7, 1 );
+		int previousMax = cal.getActualMaximum( Calendar.DAY_OF_MONTH );
+		for (int i = (previousMax-offset)+1; i <= previousMax; i++ )
 		{
-			dayStart = 31;
-			dayOrder = 0;
-			days = 30;
-			monthName = "September";
+			
+			Day day = new Day( i, month-1 );
+			day.addMouseListener( new DayClick( day ) );
+			this.add( day );
 		}
 		
-		else if(month == 1){
-			dayStart = 28;
-			dayOrder = 2;
-			days = 31;
-			monthName = "October";
-			}
-			else if(month == 2){
-			dayStart = 26;
-			dayOrder = 5;
-			days = 30;
-			monthName = "November";
-			}
-			else {
-			dayStart = 30;
-			dayOrder = 0;
-			days = 31;
-			monthName = "December";
-			}
-
-
-
-
+		cal.set( 2014 , month+8, 1 );
+		for (int i = 1; i <= cal.getActualMaximum( Calendar.DAY_OF_MONTH ); i++ )
+		{
+			Day day = new Day( i, month );
+			day.addMouseListener( new DayClick( day ) );
+			this.add( day );
+		}
+		
 	}
 
-	public void paintComponent(Graphics g) 
+
+	public String getMonth() 
+	{
+		return Integer.toString( month );
+	}
+
+
+	public void nextMonth() 
+	{
+		
+		
+	}
+
+
+	public void prevMonth() 
+	{
+		
+		
+	}
+	
+	public static void generateMonth( int aMonth )
+	{
+		
+	}
+	
+
+/*	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
 		Font serifFont = new Font("Serif", Font.PLAIN, 18);
 		g.setFont(serifFont);
-		
+
 		g.setColor(Color.white); //Line 62
 		g.drawString(monthName, 280, 35);
 
@@ -68,6 +96,7 @@ public class CalendarDisplay extends JPanel implements MouseListener
 		int dy;
 		int dayNumber = dayStart;
 
+		int count = 0;
 		// Loop for columns
 		for (int i = 0; i < 5; i = i + 1) 
 		{
@@ -86,6 +115,7 @@ public class CalendarDisplay extends JPanel implements MouseListener
 				}
 				else if( dayOrder == 0 )
 				{
+					offset = count+1;
 					dayNumber = 1;
 					dayOrder--;
 				}
@@ -97,6 +127,7 @@ public class CalendarDisplay extends JPanel implements MouseListener
 						dayNumber = 1;
 					}
 				}
+				count++;
 
 			}
 		}
@@ -156,44 +187,43 @@ public class CalendarDisplay extends JPanel implements MouseListener
 		if (xIndex == -1 || yIndex == -1) {
 			return;
 		}
-		
-		
-		//sept
-		if ( calendar.getMonth() == 0 )
+
+		int date = ( xIndex ) + ( 7*yIndex );
+		int dayIndex = date - (offset);
+		if ( dayIndex >= 0 && date < days+offset )
 		{
-			int date = ( xIndex ) + ( 7*yIndex );
-			if ( date != 0 && date <= 30 )
-			{
-				Day selected = calendar.getDay( date );
-				DayDisplay toDisplay = new DayDisplay( selected );
-				toDisplay.setVisible( true );
-			}
+			System.out.println( dayIndex );
+			
+			Day selected = calendar.getDay( dayIndex );
+			DayDisplay toDisplay = new DayDisplay( selected );
+			toDisplay.setVisible( true );
 		}
+
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
-	}
+		
+	}*/
 
 }

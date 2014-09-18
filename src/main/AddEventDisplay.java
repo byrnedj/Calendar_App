@@ -1,9 +1,12 @@
 package main;
 
+import java.awt.Container;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,19 +21,33 @@ public class AddEventDisplay extends JFrame
 	 */
 	private static final long serialVersionUID = 3764577000885195479L;
 	
-	public AddEventDisplay(Date date )
+	public AddEventDisplay( ArrayList<Event> events )
 	{
-
-		this.setLayout( new GridLayout(rows, cols) );
+		Container pane = getContentPane();
+		GroupLayout gl = new GroupLayout(pane);
+		pane.setLayout(gl);
+		gl.setAutoCreateContainerGaps(true);
 		
-		//close button
-		JButton closeButton = new JButton( "Close" );
-		closeButton.addMouseListener( new CloseListener( this ) );
-		this.add( closeButton );
 		
 		JButton saveButton = new JButton( "Save" );
-		closeButton.addActionListener( new SaveListener() );
-		this.add( saveButton );
+		saveButton.addActionListener( new SaveListener() );
+		
+
+		gl.setHorizontalGroup( gl.createParallelGroup()
+				.addComponent( saveButton )
+				
+				);
+
+		gl.setVerticalGroup( gl.createSequentialGroup()
+				.addComponent( saveButton )
+				);
+
+		pack();
+		
+		setTitle( "New Event" );
+		setSize(300, 200);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);   
 	}
 
 }

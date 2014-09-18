@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -13,16 +14,17 @@ public class AddListener implements MouseListener
 {
 
 	private Date date;
+	private ArrayList<Event> events;
 	
-	public AddListener( Date aDate )
+	public AddListener( ArrayList<Event> e )
 	{
-		date = aDate;
+		events = e;
 	}
 	
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		JFrame addEvent = new AddEventDisplay( date );
+		JFrame addEvent = new AddEventDisplay( events );
 		addEvent.setVisible( true );
 		
 	}

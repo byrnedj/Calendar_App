@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.JButton;
 
-public class Day 
+
+public class Day extends JButton
 {
 	private ArrayList<Event> events;
 	private int date;
@@ -30,6 +32,7 @@ public class Day
 		events = new ArrayList<Event>();
 		date = aDate;
 		month = aMonth;
+		this.setText( Integer.toString( date ) );
 	}
 	
 	/**
@@ -80,7 +83,6 @@ public class Day
 		events.remove( aOldEvent );
 		events.add( aNewEvent );
 	}
-	
 
 	
 }

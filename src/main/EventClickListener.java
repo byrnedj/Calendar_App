@@ -7,12 +7,12 @@ import javax.swing.JPanel;
 
 public class EventClickListener implements ActionListener
 {
-	Calendar calendar;
+	CalendarData calendarData;
 	JPanel calendarDisplay;
 
-	public EventClickListener( Calendar cal, JPanel display)
+	public EventClickListener( CalendarData cal, JPanel display)
 	{
-		calendar = cal;
+		calendarData = cal;
 		calendarDisplay = display;
 	}
 	

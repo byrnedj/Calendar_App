@@ -45,7 +45,7 @@ public class DayDisplay extends JFrame
 		EventDisplay eventList = new EventDisplay( events );
 
 		JButton addButton = new JButton( "Add" );
-		addButton.addMouseListener( new AddListener( date ) );
+		addButton.addMouseListener( new AddListener( events ) );
 
 
 		JButton deleteButton = new JButton( "Delete" );
@@ -56,6 +56,7 @@ public class DayDisplay extends JFrame
 				.addComponent( addButton )
 				.addComponent( deleteButton )
 				.addComponent( eventList )
+				
 				);
 
 		gl.setVerticalGroup( gl.createSequentialGroup()

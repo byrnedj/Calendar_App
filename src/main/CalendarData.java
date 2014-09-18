@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 
 
-public class Calendar 
+public class CalendarData 
 {
 	private int month;
 	private int year;
@@ -13,24 +13,22 @@ public class Calendar
 	/**
 	 * Default constructor, sets month and year to 0,
 	 */
-	public Calendar( int aMonth )
+	public CalendarData( int aMonth )
 	{
 		month = aMonth;
 		days = new ArrayList<Day>();
-		//offset is defined as the number of days of the previous month in the calendar
-		int offset = 0;
+		
 		int numdays = 0;
-		if ( month == 0 )
+		if( month == 0 || month == 2)
 		{
-			offset = 1;
 			numdays = 30;
 		}
-		for ( int i = 0; i < offset; i++)
+
+		else
 		{
-			//Dummy days
-			days.add( new Day() );
+			numdays = 31;
 		}
-		for ( int i = offset; i <= numdays+offset; i++ )
+		for ( int i = 1; i <= numdays; i++ )
 		{
 			days.add( new Day( i, month ) );
 		}

@@ -6,54 +6,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 
 public class MonthCycle implements ActionListener 
 {
-
-	private int month;
 	private boolean next;
-	private Calendar calendar;
 	private CalendarDisplay calendarDisplay;
-	private Container pane;
-	private GridBagConstraints con;
+	private CalendarApp calendarApp;
+	private ArrayList<CalendarDisplay> calendars;
+	private int currentMonth;
 	
-	public MonthCycle( Calendar cal, CalendarDisplay calDisplay, Container aPane, GridBagConstraints c, boolean aNext )
+	public MonthCycle( CalendarDisplay calDisplay, ArrayList<CalendarDisplay> calendarDisplays, CalendarApp app, boolean aNext, int month )
 	{
-		month = cal.getMonth();
-		calendar = cal;
+		calendars = calendarDisplays;
 		calendarDisplay = calDisplay;
+		currentMonth = month;
+		calendarApp = app;
 		next = aNext;
-		pane = aPane;
-		con = c;
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-		if ( month < 3 && next )
+		if ( next )
 		{
-			month++;
+			currentMonth += 1;
+			CalendarDisplay nDisplay = calendars.get( currentMonth );
+			calendarApp.setDisplay( nDisplay );
 		}
-		else if ( month > 0 && !next )
+		else
 		{
-			month--;
+			currentMonth -= 1;
+			CalendarDisplay nDisplay = calendars.get( currentMonth );
+			calendarApp.setDisplay( nDisplay );
 		}
-		Calendar newCal = new Calendar( month );
-		CalendarDisplay newDisplay = new CalendarDisplay( newCal, month );
-		pane.remove( calendarDisplay );
-		con.gridy = 1;
-		pane.add( newDisplay, con );
-		pane.repaint();
-		pane.printAll( pane.getGraphics() );
-		System.out.println( newCal.getMonth() );
-		//System.out.println( );
 		
 		
-	}
-	
-	public int getNewMonth()
-	{
-		return month;
+		
 	}
 
 }

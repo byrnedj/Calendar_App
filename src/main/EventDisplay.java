@@ -34,7 +34,7 @@ public class EventDisplay extends JTextArea
 		}
 		else
 		{
-			this.setText( events.toString() );
+			this.setText(events.toString());
 		}
 	}
 

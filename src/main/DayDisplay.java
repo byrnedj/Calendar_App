@@ -45,7 +45,7 @@ public class DayDisplay extends JFrame
 		EventDisplay eventList = new EventDisplay( events );
 
 		JButton addButton = new JButton( "Add" );
-		addButton.addMouseListener( new AddListener( events ) );
+		addButton.addMouseListener( new AddListener( events, date ) );
 
 
 		JButton deleteButton = new JButton( "Delete" );

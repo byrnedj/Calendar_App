@@ -16,15 +16,16 @@ public class AddListener implements MouseListener
 	private Date date;
 	private ArrayList<Event> events;
 	
-	public AddListener( ArrayList<Event> e )
+	public AddListener( ArrayList<Event> e, Date date )
 	{
 		events = e;
+		this.date = date;
 	}
 	
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		JFrame addEvent = new AddEventDisplay( events );
+		JFrame addEvent = new AddEventDisplay( events, date );
 		addEvent.setVisible( true );
 		
 	}

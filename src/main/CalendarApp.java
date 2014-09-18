@@ -52,7 +52,6 @@ public class CalendarApp extends JFrame
 		display.setBackground(Color.black);
 		// make the window a specific size
 		display.setPreferredSize(new Dimension(740, 480));
-
 		
 		prevMonth = new JButton("<< Previous Month");
 		prevMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, false, month ) );

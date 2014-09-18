@@ -59,7 +59,22 @@ public class CalendarDisplay extends JPanel
 
 	public String getMonth() 
 	{
-		return Integer.toString( month );
+		String monthName;
+		monthName = Integer.toString( month );
+		
+		if(monthName.equals("0")){
+			monthName = "September";
+		}
+		else if(monthName.equals("1")){
+			monthName = "October";
+		}
+		else if(monthName.equals("2")){
+			monthName = "November";
+		}
+		else{
+			monthName = "December";
+		}
+		return monthName;
 	}
 
 

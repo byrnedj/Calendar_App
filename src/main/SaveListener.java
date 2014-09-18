@@ -5,28 +5,40 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 public class SaveListener implements ActionListener 
 {
-	private String name;
-	private String description;
-	private Event newEvent;
+	private JTextField name;
+	private JTextArea  description;
 	private Date date;
-	private ArrayList<Event> events;
-	private AddEventDisplay stuff;
+	private Day day;
+	private AddEventDisplay toClose;
+	private DayDisplay parent;
+	private JButton button;
 	
-	public SaveListener(Date date, String description, String name, AddEventDisplay stuff, ArrayList<Event> events){
-		this.name = name;
-		this.description = description;
-		this.date = date;
-		this.events = events;
-		this.stuff = stuff;
+	public SaveListener( JTextField aName, JTextArea aDesc, AddEventDisplay aToClose, DayDisplay toUpdate, Day aDay )
+	{
+		name = aName;
+		description = aDesc;
+		date = aDay.getDate();
+		toClose = aToClose;
+		parent = toUpdate;
+		day = aDay;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		newEvent = new Event(date, name,description);
-		events.add(newEvent);
-		stuff.dispose();
+		Event newEvent = new Event( date, name.getText(), description.getText()  );
+		day.addEvent( newEvent );
+		toClose.dispose();
+		parent.dispose();
+		
+		DayDisplay toDisplay = new DayDisplay( day);
+		toDisplay.setVisible( true );
 	}
 
 }

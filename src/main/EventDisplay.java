@@ -12,10 +12,11 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class EventDisplay extends JTextArea
+public class EventDisplay extends JList
 {
 	private static final long serialVersionUID = -3924738998808587098L;
 	private ArrayList<Event> events;
@@ -28,14 +29,7 @@ public class EventDisplay extends JTextArea
 	{
 		events = aEvents;
 		this.setPreferredSize(new Dimension(100, 100));
-		if ( events.isEmpty() )
-		{
-			this.setText("Nothing for today!");
-		}
-		else
-		{
-			this.setText(events.toString());
-		}
+		
 	}
 
 	/*public void paintComponent( Graphics g )

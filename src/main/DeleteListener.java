@@ -7,15 +7,20 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 public class DeleteListener implements MouseListener {
 
-	private ArrayList<Event> eventList;
+	private JList eventList;
+	private Day day;
+	private DayDisplay parent;
 	
-	public DeleteListener(ArrayList<Event> events) 
+	public DeleteListener( JList events, Day aDay, DayDisplay aDisplay ) 
 	{
 		eventList = events;
+		day = aDay;
+		parent = aDisplay;
 	}
 
 	
@@ -23,7 +28,12 @@ public class DeleteListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		JDialog deleteDisplay = new DeleteDisplay( eventList );
+		day.deleteEvent( (Event) eventList.getSelectedValue() );
+		
+		parent.dispose();
+		
+		DayDisplay toDisplay = new DayDisplay( day);
+		toDisplay.setVisible( true );
 		
 	}
 

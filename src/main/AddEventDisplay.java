@@ -27,7 +27,7 @@ public class AddEventDisplay extends JFrame
 	 */
 	private static final long serialVersionUID = 3764577000885195479L;
 	
-	public AddEventDisplay( ArrayList<Event> events, Date date )
+	public AddEventDisplay( Day aDay, DayDisplay toUpdate )
 	{
 		Container pane = getContentPane();
 		GroupLayout gl = new GroupLayout(pane);
@@ -41,7 +41,7 @@ public class AddEventDisplay extends JFrame
 		description.setLineWrap(true);
 		
 		JButton saveButton = new JButton( "Save" );
-		saveButton.addActionListener( new SaveListener(date,description.getText(), name.getText(), this, events) );
+		saveButton.addActionListener( new SaveListener( name, description, this, toUpdate , aDay ) );
 
 		gl.setHorizontalGroup( gl.createParallelGroup()
 				.addComponent(nameLabel)

@@ -16,7 +16,7 @@ public class MonthCycle implements ActionListener
 	private CalendarApp calendarApp;
 	private ArrayList<CalendarDisplay> calendars;
 	private int currentMonth;
-	
+
 	public MonthCycle( CalendarDisplay calDisplay, ArrayList<CalendarDisplay> calendarDisplays, CalendarApp app, boolean aNext, int month )
 	{
 		calendars = calendarDisplays;
@@ -28,21 +28,28 @@ public class MonthCycle implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-		if ( next )
+		try
 		{
-			currentMonth += 1;
-			CalendarDisplay nDisplay = calendars.get( currentMonth );
-			calendarApp.setDisplay( nDisplay );
+			if ( next )
+			{
+				currentMonth += 1;
+				CalendarDisplay nDisplay = calendars.get( currentMonth );
+				calendarApp.setDisplay( nDisplay );
+			}
+			else
+			{
+				currentMonth -= 1;
+				CalendarDisplay nDisplay = calendars.get( currentMonth );
+				calendarApp.setDisplay( nDisplay );
+			}
 		}
-		else
+		catch( IndexOutOfBoundsException e )
 		{
-			currentMonth -= 1;
-			CalendarDisplay nDisplay = calendars.get( currentMonth );
-			calendarApp.setDisplay( nDisplay );
+			//do nothing
 		}
-		
-		
-		
+
+
+
 	}
 
 }

@@ -13,19 +13,19 @@ import javax.swing.JPanel;
 public class AddListener implements MouseListener
 {
 
-	private Date date;
-	private ArrayList<Event> events;
+	private Day day;
+	private DayDisplay dayDisplay;
 	
-	public AddListener( ArrayList<Event> e, Date date )
+	public AddListener( Day aDay, DayDisplay aDayDisplay )
 	{
-		events = e;
-		this.date = date;
+		day = aDay;
+		dayDisplay = aDayDisplay;
 	}
 	
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		JFrame addEvent = new AddEventDisplay( events, date );
+		JFrame addEvent = new AddEventDisplay( day, dayDisplay );
 		addEvent.setVisible( true );
 		
 	}

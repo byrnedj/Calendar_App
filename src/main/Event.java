@@ -32,6 +32,11 @@ public class Event
 		
 	}
 	
+	
+	public String toString()
+	{
+		return name + ": " + description;
+	}
 	/**
 	 * Returns the time of the event
 	 * @return Date representation of the time

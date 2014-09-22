@@ -1,12 +1,15 @@
 package main;
 
 import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +30,8 @@ public class CalendarApp extends JFrame
 	private JLabel monthName;
 	private JButton prevMonth;
 	private JButton nextMonth;
+	private JLabel pic;
+
 	
 	public CalendarApp()
 	{	
@@ -46,13 +51,13 @@ public class CalendarApp extends JFrame
 		
 		this.setTitle("Calendar");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);   
-
+		
 		// Create display for drawing
 		display = calendarDisplays.get( cal.get(Calendar.MONTH )-8 );
 		display.setBackground(Color.black);
+		
 		// make the window a specific size
 		display.setPreferredSize(new Dimension(740, 480));
-		
 		prevMonth = new JButton("<< Previous Month");
 		prevMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, false, month ) );
 		
@@ -63,7 +68,29 @@ public class CalendarApp extends JFrame
 		monthName = new JLabel();
 		monthName.setText( display.getMonth() );
 		
+		if(display.getMonth().equals("September")){
+		ImageIcon sept = new ImageIcon(getClass().getResource("/September_Dog.png"));
+		pic = new JLabel();
+		pic.setIcon(sept);
+		}
+		else if(display.getMonth().equals("October")){
+			ImageIcon sept = new ImageIcon(getClass().getResource("/October_Dog.jpg"));
+			pic = new JLabel();
+			pic.setIcon(sept);
+		}
+		else if(display.getMonth().equals("November")){
+			ImageIcon sept = new ImageIcon(getClass().getResource("/November_Dog.png"));
+			pic = new JLabel();
+			pic.setIcon(sept);
+		}
+		else{
+			ImageIcon sept = new ImageIcon(getClass().getResource("/December_Dog.jpg"));
+			pic = new JLabel();
+			pic.setIcon(sept);
+		}
+		
 		gl.setHorizontalGroup( gl.createParallelGroup()
+				.addComponent(pic)
 				.addComponent( monthName )
 				.addComponent( nextMonth )
 				.addComponent( prevMonth )
@@ -72,6 +99,7 @@ public class CalendarApp extends JFrame
 				);
 
 		gl.setVerticalGroup( gl.createSequentialGroup()
+				.addComponent(pic)
 				.addComponent( monthName )
 				.addComponent( nextMonth )
 				.addComponent( prevMonth )
@@ -88,6 +116,7 @@ public class CalendarApp extends JFrame
 		pane.setLayout( gl );
 		gl.setAutoCreateContainerGaps(true);
 		
+		remove(pic);
 		remove(display);
 		remove(monthName);
 		remove(nextMonth);
@@ -105,8 +134,7 @@ public class CalendarApp extends JFrame
 		display = aDisplay;
 		display.setBackground(Color.black);
 		// make the window a specific size
-		display.setPreferredSize(new Dimension(740, 480));
-
+		display.setPreferredSize(new Dimension(740, 480));		
 		
 		prevMonth = new JButton("<< Previous Month");
 		prevMonth.addActionListener( new MonthCycle( display, calendarDisplays, this, false, month ) );
@@ -118,7 +146,29 @@ public class CalendarApp extends JFrame
 		monthName = new JLabel();
 		monthName.setText( display.getMonth() );
 		
+		if(display.getMonth().equals("September")){
+		ImageIcon sept = new ImageIcon(getClass().getResource("/September_Dog.png"));
+		pic = new JLabel();
+		pic.setIcon(sept);
+		}
+		else if(display.getMonth().equals("October")){
+			ImageIcon sept = new ImageIcon(getClass().getResource("/October_Dog.jpg"));
+			pic = new JLabel();
+			pic.setIcon(sept);
+		}
+		else if(display.getMonth().equals("November")){
+			ImageIcon sept = new ImageIcon(getClass().getResource("/November_Dog.png"));
+			pic = new JLabel();
+			pic.setIcon(sept);
+		}
+		else{
+			ImageIcon sept = new ImageIcon(getClass().getResource("/December_Dog.jpg"));
+			pic = new JLabel();
+			pic.setIcon(sept);
+		}
+		
 		gl.setHorizontalGroup( gl.createParallelGroup()
+				.addComponent(pic)
 				.addComponent( monthName )
 				.addComponent( nextMonth )
 				.addComponent( prevMonth )
@@ -127,6 +177,7 @@ public class CalendarApp extends JFrame
 				);
 
 		gl.setVerticalGroup( gl.createSequentialGroup()
+				.addComponent(pic)
 				.addComponent( monthName )
 				.addComponent( nextMonth )
 				.addComponent( prevMonth )
@@ -140,7 +191,7 @@ public class CalendarApp extends JFrame
 		CalendarApp app = new CalendarApp();
 		app.pack();
 		app.setVisible(true);
-		
+
 		
 
 	}
